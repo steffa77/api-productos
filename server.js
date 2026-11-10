@@ -1,7 +1,7 @@
 //Necesita que app haya gestiona toda la configuración
 const app = require('./app')
 const { port } = require('./src/config/env')
-const { probarConexion } = require('./config/database')
+const { probarConexion } = require('./src/config/database')
 
 const iniciarServidor = async() => {
   try{
