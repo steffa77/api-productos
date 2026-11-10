@@ -1,6 +1,6 @@
 //app = application
 const express = require('express') //Framework
-const routes = require('./routes') //Rutas
+const routes = require('./src/routes') //Rutas
 
 const app = express() //Inicializamos la App
 
