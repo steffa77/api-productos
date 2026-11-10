@@ -11,6 +11,8 @@ const CAMPOS = 'id, marca, descripcion, precio, stock' //Dato común
 //milisegundos, segundos (1000 = 1seg)
 //Todas las funciones reciben y envían datos (pasarelas)
 //req (require - solicitar >>>), res (result - <<< resultado) 
+
+//API REST -> http://miaplicacion.com/api/productos/
 const listarProductos = async(req, res) => {
   //Se utilizar try - catch porque existe una probabilidad de error
   try{
@@ -30,9 +32,37 @@ const listarProductos = async(req, res) => {
   }
 }
 
+//Buscar ¿cómo funciona?
+//API REST -> http://miaplicacion.com/api/productos/1
 const obtenerProducto = async(req, res) => {
   try{
+    //req.params representa los parámetros enviados por la URL
+    const id = Number(req.params.id)
+    if(id <= 0){
+      return res.status(400).json({
+        ok: false,
+        message: 'El ID no puede ser negativo o cero'
+      })
+    }
 
+    //Si podemos buscar (>=0). Utilizaremos EXECUTE porque pasaremos parámetros
+    //Evitaremos SQLinjection (técnica hackeo)
+    //? = comodín, representa un valor
+    const [registro] = await pool.execute(`SELECT * FROM productos WHERE id = ?`, [id]) 
+
+    //Existe la posibilidad que NO encontremos el registro
+    if(registro.length === 0){
+      return res.status(404).json({
+        ok: false,
+        message: 'No existe el producto'
+      })
+    }
+
+    //Si llegamos hasta aqui, entonces SI existe el registro
+    res.status(200).json({
+      ok: true,
+      data: registro[0]
+    })
   }catch(e){
     console.error(e)
     res.status(500).json({
