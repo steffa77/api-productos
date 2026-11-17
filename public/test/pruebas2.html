@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+      border: 0px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: normal;
+    }
+
+    .contenedor{
+      width: 90%;
+      margin: 0 auto; /* Centrado */
+      background-color: antiquewhite;
+      padding: .5rem;
+      text-align: center;
+    }
+
+    .tarjeta{
+      padding: 1rem; /* Tamaño <M> */
+      width: 350px;
+      background-color: aqua;
+      display: inline-block;
+      border-radius: 10px;
+      margin-bottom: .25rem; /* Separación inferior */
+    }
+
+    .tarjeta a{
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    a:hover{
+      text-decoration: underline;
+    }
+
+    .tarjeta h5{
+      font-style: italic;
+      margin-bottom: .25rem;
+    }
+  </style>
+
+  <select name="selector-carreras" id="selector-carreras">
+    <option value="">Mostrar todas</option>
+    <option value="Ingeniería de Software">Ingeniería de Software</option>
+    <option value="Diseño Gráfico Digital">Diseño Gráfico Digital</option>
+    <option value="Administración Industrial">Administración Industrial</option>
+  </select>
+
+  <div class="contenedor">
+    <!-- Dinámico -->
+  </div>
+
+  <script>
+    /* Imaginemod que los datos para las tarjetas vienen de una consulta */
+    /* Con esta información ¿cómo las renderizamos? */
+    const alumnos = [
+      {
+        apellidos: "Garay Mendoza",
+        nombres: "Steffano",
+        carrera: "Ingeniería de Software",
+        telefono: "999888777",
+        correo: "steffanomendoza8@gmail.com"
+      },
+      {
+        apellidos: "Martinez Crisostomo",
+        nombres: "Margarita",
+        carrera: "Diseño Gráfico Digital",
+        telefono: "956222333",
+        correo: "margarita@gmail.com"
+      },
+      {
+        apellidos: "Flores Atuncar",
+        nombres: "Arturo José",
+        carrera: "Ingeniería de Software",
+        telefono: "956111000",
+        correo: "arturo@gmail.com"
+      },
+      {
+        apellidos: "Peñaloza Perez",
+        nombres: "Carlos",
+        carrera: "Administración Industrial",
+        telefono: "956444777",
+        correo: "carlos@gmail.com"
+      },
+      {
+        apellidos: "Quintana Perea",
+        nombres: "Flor Katherine",
+        carrera: "Diseño Gráfico Digital",
+        telefono: "956777000",
+        correo: "flor@gmail.com"
+      }
+    ]
+
+    const contenedor = document.querySelector(".contenedor") // . = clase
+    const selector = document.getElementById('selector-carreras')
+
+    //Evento (¿Cuánto ejecutamos la instrucción?)
+    selector.addEventListener("change", function(){
+      renderizarTarjetas(selector.value)
+    })
+
+    //Continuamos...
+    //Manejo de DOM Document Object Model
+    //Esta función requiere el nombre de una carrera (opcional), aplicar
+    //el filtro con el nombre de la carrera, en caso esté vacía, mostrar todo
+    function renderizarTarjetas(carrera = ""){
+      let listaFiltrada = []
+      contenedor.innerHTML = ''
+
+      //Operador ternario
+      listaFiltrada = 
+        carrera.trim() === ""
+        ? alumnos
+        : alumnos.filter(alumno => alumno.carrera === carrera)
+
+      //Paso 1 - Recorrer todo el arreglo
+      listaFiltrada.forEach(alumno => { 
+        const nuevaTarjeta = `
+        <div class="tarjeta">
+          <h4>${alumno.apellidos} ${alumno.nombres}</h4>
+          <h5>${alumno.carrera}</h5>
+          <a href="tel:${alumno.telefono}">Contactar</a>
+          <a href="mailto:${alumno.correo}">Enviar correo</a>
+        </div>
+        ` 
+
+        contenedor.innerHTML += nuevaTarjeta
+      });
+    }
+
+    renderizarTarjetas()
+</script>
+</body>
+</html>
