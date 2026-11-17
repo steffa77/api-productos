@@ -19,7 +19,7 @@ const validarCampos = ({marca, descripcion, precio, stock} = {}) => {
   if (marca.trim() === '') errores.push('La marca es obligatoria')
   if (descripcion.trim() === '') errores.push('La descripción es necesaria')
   if (precio === undefined || isNaN(precio) || precio < 0) errores.push('Verifique el precio')
-  if (stock === undefined || Number.isInteger(stock) || Number(stock) < 0) errores.push('Error en el stock')
+  if (stock === undefined || !Number.isInteger(stock) || Number(stock) < 0) errores.push('Error en el stock')
   
     //Es posible tener más de un error
   return errores
@@ -138,7 +138,7 @@ const actualizarProducto = async(req, res) => {
 
     //¿Y si el ID no existe?
     const [existe] = await pool.execute('SELECT id FROM productos WHERE id = ?', [id])
-    if (existe === 0){
+    if (existe.length === 0){
       return res.status(404).json({
         ok: false,
         message: 'El ID no existe'
@@ -148,9 +148,9 @@ const actualizarProducto = async(req, res) => {
     //Finalmente actualizamos...
     const consulta = 'UPDATE productos SET marca=?, descripcion=?, precio=?, stock=? WHERE id=?'
     const { marca, descripcion, precio, stock } = req.body
-    const [resultado] = await pool.execute(consulta, [marca, descripcion, precio, stock])    
+    const [resultado] = await pool.execute(consulta, [marca, descripcion, precio, stock, id])    
 
-    res.status(204).json({
+    res.status(200).json({
       ok: true,
       filasAfectadas: resultado.affectedRows
     })
