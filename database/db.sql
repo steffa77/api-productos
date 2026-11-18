@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS clientes
     direccion   VARCHAR(150) NOT NULL,
     email       VARCHAR(100) NOT NULL,
     create_at   DATETIME     NOT NULL DEFAULT NOW(),
-    updated_at  DATETIME     NULL
+    update_at  DATETIME     NULL
 ) ENGINE = INNODB;
 
 INSERT INTO clientes
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS proveedores
     ruc          VARCHAR(11)  NOT NULL,
     direccion    VARCHAR(150) NOT NULL,
     create_at    DATETIME     NOT NULL DEFAULT NOW(),
-    updated_at   DATETIME     NULL
+    update_at   DATETIME     NULL
 ) ENGINE = INNODB;
 
 INSERT INTO proveedores
