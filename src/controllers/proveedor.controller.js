@@ -114,7 +114,7 @@ const actualizarProveedor = async (req, res) => {
             })
         }
 
-        const consulta = 'UPDATE proveedores SET razonsocial=?, contacto=?, ruc=?, direccion=?, update_at=NOW() WHERE id=?'
+        const consulta = 'UPDATE proveedores SET razonsocial=?, contacto=?, ruc=?, direccion=?, updated_at=NOW() WHERE id=?'
         const { razonsocial, contacto, ruc, direccion } = req.body
         const [resultado] = await pool.execute(consulta, [razonsocial, contacto, ruc, direccion, id])
 

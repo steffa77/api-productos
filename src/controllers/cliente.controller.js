@@ -72,7 +72,7 @@ const crearCliente = async (req, res) => {
         }
 
         const { apellidos, nombres, telefono, direccion, email } = req.body
-        const consulta = 'INSERT INTO clientes (apellidos, nombres, telefono, dirrecion, email) VALUES (?,?,?,?,?)'
+        const consulta = 'INSERT INTO clientes (apellidos, nombres, telefono, direccion, email) VALUES (?,?,?,?,?)'
         const [registro] = await pool.execute(consulta, [apellidos, nombres, telefono, direccion, email])
 
         res.status(201).json({
@@ -115,7 +115,7 @@ const actualizarCliente = async (req, res) => {
             })
         }
 
-        const consulta = 'UPDATE clientes SET apellidos=?, nombres=?, telefono=?, direccion=?, email=?, update_at=NOW() WHERE id=?'
+        const consulta = 'UPDATE clientes SET apellidos=?, nombres=?, telefono=?, direccion=?, email=?, updated_at=NOW() WHERE id=?'
         const { apellidos, nombres, telefono, direccion, email } = req.body
         const [resultado] = await pool.execute(consulta, [apellidos, nombres, telefono, direccion, email, id])
 
