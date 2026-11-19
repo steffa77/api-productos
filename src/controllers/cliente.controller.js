@@ -1,4 +1,3 @@
-const { act } = require('react')
 const { pool } = require('../config/database')
 
 const validarCampos = ({ apellidos, nombres, telefono, direccion, email} = {}) => {
