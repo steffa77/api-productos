@@ -16,7 +16,7 @@ DB_PASSWORD=
 DB_NAME=
 DB_CONNECTION_LIMIT=10
 ```
-5. Necesitamos la tabla _productos_
+5. Necesitamos la tabla _productos_, _clientes_ y _proveedores_
 ```sql
 CREATE TABLE IF NOT EXISTS productos
 (
@@ -29,6 +29,38 @@ CREATE TABLE IF NOT EXISTS productos
    update_at     DATETIME      NULL 
 )ENGINE = INNODB;
 ```
+
+```sql
+CREATE TABLE IF NOT EXISTS clientes
+(
+    id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    apellidos   VARCHAR(100) NOT NULL,
+    nombres     VARCHAR(100) NOT NULL,
+    telefono    VARCHAR(20)  NOT NULL,
+    direccion   VARCHAR(150) NOT NULL,
+    email       VARCHAR(100) NOT NULL,
+    create_at   DATETIME     NOT NULL DEFAULT NOW(),
+    update_at  DATETIME     NULL
+) ENGINE = INNODB;
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS proveedores
+(
+    id           INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    razonsocial  VARCHAR(150) NOT NULL,
+    contacto     VARCHAR(100) NOT NULL,
+    ruc          VARCHAR(11)  NOT NULL,
+    direccion    VARCHAR(150) NOT NULL,
+    create_at    DATETIME     NOT NULL DEFAULT NOW(),
+    update_at   DATETIME     NULL
+) ENGINE = INNODB;
+```
 6. Ejecutar el proyecto escribiendo: ```node src/server```
 7. Utilice [Postman](https://www.postman.com/product/api-client/) o cualquier software similar para realizar el TEST
+
+**Endpoints disponibles (CRUD: GET, POST, PUT, DELETE)**
+* **Productos:** `/api/productos`
+* **Clientes:** `/api/clientes`
+* **Proveedores:** `/api/proveedores`
 

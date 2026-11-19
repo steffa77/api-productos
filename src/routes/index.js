@@ -8,12 +8,16 @@ const { Router } = require('express')
 
 //Esta se realizar por cada routes
 const productoRoutes = require('./producto.routes')
+const clienteRoutes = require('./cliente.routes')
+const proveedorRoutes = require('./proveedor.routes')
 
 //Esto es solo una para tdoas las rutas
 const router = Router()
 
 //Esto es por cada routes
 router.use('/productos', productoRoutes)
+router.use('/clientes', clienteRoutes)
+router.use('/proveedores', proveedorRoutes)
 
 //Se exportan todas las rutas
 module.exports = router
