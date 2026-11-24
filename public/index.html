@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express NodeJS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-MKn5NWVBEuQXJE7TSKSgPUmMiSCmVTfCsR+VSSeQpHnoyJQZZFn/kBn+Ht5jZDPQ"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container py-4">
+      <h1 class="mb-4">Mantenimiento de productos</h1>
+      <div id="mensaje" class="mb-3"></div>
+      <!-- margin-bottom-3 -->
+    </div>
+    <!-- Columnas [FORMULARIO - TABLA] -->
+    <!-- 
+    [FORMULARIO]
+    [TABLA]
+     -->
+    <div class="row g-4">
+      <!-- Formulario -->
+      <div class="col-12 md:col-4">
+        <div class="card">
+          <div class="card-header" id="tituloFormulario">Nuevo producto</div>
+          <div class="card-body">
+            <form id="formProducto">
+              <!-- Campo oculto -->
+              <input type="hidden" id="id"/>
+
+              <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" id="marca" class="form-control" required />
+              </div>
+
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input
+                  type="text"
+                  id="descripcion"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="precio" class="form-label">Precio</label>
+                <input
+                  type="number"
+                  min="0"
+                  id="precio"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input
+                  type="number"
+                  min="0"
+                  value="1"
+                  id="stock"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div>
+                <button type="submit" class="btn-solid theme-primary">
+                  Guardar
+                </button>
+                <button type="button" class="btn-solid theme-secondary">
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla HTML -->
+      <div class="col-12 md:col-8">
+        <!-- Buscador -->
+        <form id="formBuscar" class="d-flex gap-2 mb-3">
+          <input
+            type="text"
+            id="buscarId"
+            class="form-control"
+            placeholder="Escriba el ID"
+            required
+          />
+          <button type="submit" class="btn-solid theme-secondary">
+            Buscar
+          </button>
+          <button type="button" id="mostrarTodos" class="btn-solid theme-secondary">
+            Ver todos
+          </button>
+        </form>
+
+        <!-- Tabla -->
+        <div class="table-resposive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Marca</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpoTabla"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-+PW0IDVGGwmpaBQvcXY+W0BcpHpITFB3dSfSoGvDdHtLbrLpSbpGcvtQRM/BJpz+"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Script modulo -->
+    <script src="./js/productos.js"></script>
+  </body>
+</html>
